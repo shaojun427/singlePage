@@ -1,7 +1,7 @@
 import nattyFetch from 'natty-fetch';
 
 const context = nattyFetch.context({
-  mockUrlPrefix: '/mock/',
+  mockUrlPrefix: 'mock/',
   mock: true,
   withCredentials: false,
   traditional: true,
@@ -17,8 +17,8 @@ const context = nattyFetch.context({
 
 context.create('Home', {
   test: {
-    mockUrl: '/home/test.json',
-    url: '/home/test.json'
+    mockUrl: 'home/test.json',
+    url: 'home/test.json'
   }
 });
 
