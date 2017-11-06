@@ -18,7 +18,7 @@ const context = nattyFetch.context({
 context.create('Home', {
   test: {
     mockUrl: 'home/test.json',
-    url: 'home/test.json'
+    url: 'mock/home/test.json'
   }
 });
 
