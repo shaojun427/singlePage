@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
-import { render } from 'react-dom';
-import { Redirect } from 'react-router-dom';
 import queryString from 'query-string';
+const I18N = window.i18n;
 
 class ErrorPage extends Component {
   constructor(props) {

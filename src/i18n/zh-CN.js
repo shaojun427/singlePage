@@ -1,6 +1,12 @@
 const zh_CN = {
-    'hello': "你好",
-    'name': '我的名字1'
+  home: {
+    title: "首页",
+    btnName: "这是一个action"
+  },
+  error: {
+    title: "错误页面",
+    info: "这是一个错误页面！"
+  }
 }
 window.i18n = zh_CN;
 export default zh_CN;

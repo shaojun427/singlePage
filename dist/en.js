@@ -60,19 +60,25 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 198);
+/******/ 	return __webpack_require__(__webpack_require__.s = 199);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 198:
+/***/ 199:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 const en = {
-  'hello': "hello",
-  'name': 'my name is {name}'
+  home: {
+    title: "Home Page",
+    btnName: "this is en action"
+  },
+  error: {
+    title: "Error Page",
+    info: "this is en error page!"
+  }
 }
 window.i18n = en;
 /* harmony default export */ __webpack_exports__["default"] = (en);

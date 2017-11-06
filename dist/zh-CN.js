@@ -60,19 +60,25 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 197);
+/******/ 	return __webpack_require__(__webpack_require__.s = 198);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 197:
+/***/ 198:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 const zh_CN = {
-    'hello': "你好",
-    'name': '我的名字1'
+  home: {
+    title: "首页",
+    btnName: "这是一个action"
+  },
+  error: {
+    title: "错误页面",
+    info: "这是一个错误页面！"
+  }
 }
 window.i18n = zh_CN;
 /* harmony default export */ __webpack_exports__["default"] = (zh_CN);

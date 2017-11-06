@@ -2,9 +2,13 @@ import './index.less'
 import React, {Component} from 'react';
 import store from './store';
 import IO from '../../app/io';
+
+const I18N = window.i18n;
+
 let action = (action, data) => {
   store.dispatch({type: action,data: data});
 }
+
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -15,11 +19,14 @@ class Home extends Component {
   }
   componentWillMount() {
     let me = this;
-    store.subscribe(() => {
+    me.unsubscribe = store.subscribe(() => {
       me.setState({
         store: store.getState()
       })
     })
+  }
+  componentWillUnmount() {
+    this.unsubscribe();
   }
   changeHandle(e) {
     let me = this;
@@ -41,7 +48,7 @@ class Home extends Component {
     let me = this;
     return (<div>
       <input onChange={me.changeHandle.bind(me)} value={me.state.inputValue} type="text"/>　
-      <button onClick={me.clickHandle.bind(me)}>这是一个action</button>
+      <button onClick={me.clickHandle.bind(me)}>{I18N.home.btnName}</button>
       <div>{me.state.store.test}</div>
     </div>)
   }
