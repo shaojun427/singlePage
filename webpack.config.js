@@ -2,6 +2,7 @@ const path = require("path");
 const webpack = require("webpack");
 const EX = require("extract-text-webpack-plugin");//为了单独打包css
 const EXCSS = new EX('[name].css');
+const env = process.env.NODE_ENV;
 module.exports = {
   entry: {
     'index': './src/app/app.js',
@@ -54,7 +55,7 @@ module.exports = {
   plugins:[
     EXCSS,
     new webpack.DefinePlugin({
-        locale:JSON.stringify('[name].css')
+        "env": env
     })
   ]
 };
