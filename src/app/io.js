@@ -1,5 +1,5 @@
 import nattyFetch from 'natty-fetch';
-console.log(env)
+console.log(1111)
 let __ENV__ = (env) ? 'singlePage/mock/' : '/mock/';
 const context = nattyFetch.context({
   mockUrlPrefix: __ENV__,
