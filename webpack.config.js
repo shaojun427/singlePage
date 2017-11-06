@@ -55,7 +55,7 @@ module.exports = {
   plugins:[
     EXCSS,
     new webpack.DefinePlugin({
-        "env": env
+        "__ENV__": env
     })
   ]
 };

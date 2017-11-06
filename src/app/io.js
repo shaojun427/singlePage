@@ -1,8 +1,8 @@
 import nattyFetch from 'natty-fetch';
-let __ENV__ = (env) ? 'mock/' : '/mock/';
+
 const context = nattyFetch.context({
-  mockUrlPrefix: __ENV__,
-  mock: true,
+  mockUrlPrefix: '/mock/',
+  mock: !__ENV__,
   withCredentials: false,
   traditional: true,
   timeout: 5000,
