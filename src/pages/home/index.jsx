@@ -3,8 +3,6 @@ import React, {Component} from 'react';
 import store from './store';
 import IO from '../../app/io';
 
-const I18N = window.i18n;
-
 let action = (action, data) => {
   store.dispatch({type: action,data: data});
 }
@@ -48,7 +46,7 @@ class Home extends Component {
     let me = this;
     return (<div>
       <input onChange={me.changeHandle.bind(me)} value={me.state.inputValue} type="text"/>　
-      <button onClick={me.clickHandle.bind(me)}>{I18N.home.btnName}</button>
+      <button onClick={me.clickHandle.bind(me)}>按钮</button>
       <div>{me.state.store.test}</div>
     </div>)
   }

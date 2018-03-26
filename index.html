@@ -1,14 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
-  <title>Document</title>
-  <link rel="stylesheet" href="./dist/index.css">
+  <title></title>
+  <link rel="stylesheet" href="/index.css">
+  <script>
+    const __LOCALE__ = window.localStorage.getItem('__LOCALE__') || "zh-cn";
+    if(__LOCALE__ !== "zh-cn") {
+      let fileref = document.createElement('link');
+      fileref.setAttribute("rel", "stylesheet");
+      fileref.setAttribute("type", "text/css");
+      fileref.setAttribute("href", "./" + __LOCALE__+ ".css");
+      document.getElementsByTagName("head")[0].appendChild(fileref);
+    };
+  </script>
 </head>
 <body>
-  <div id="App"></div>
-  <script src="./dist/zh-CN.js"></script>
-  <script src="./dist/index.js"></script>
+<div id="App"></div>
+<script src="/vendor.js"></script>
+<script src="/uxcoreChild.js"></script>
+<script src="/index.js"></script>
 </body>
 </html>

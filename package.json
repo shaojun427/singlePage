@@ -1,16 +1,17 @@
 {
   "name": "demo",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "demo",
   "scripts": {
     "clear": "rm -rf dist&& mkdir dist",
-    "build": "npm run clear&& cross-env NODE_ENV=true webpack -p --progress",
-    "dev": "npm run clear&& webpack -w",
-    "watch": "webpack-dev-server --content-base --inline --hot --host 0.0.0.0"
+    "daily": "npm run clear && cross-env NODE_ENV=daily webpack -p --progress",
+    "prepub": "npm run clear && cross-env NODE_ENV=prepub webpack -p --progress",
+    "publish": "npm run clear && cross-env NODE_ENV=publish webpack -p --progress",
+    "watch": "webpack-dev-server --content-base --inline --hot --host 0.0.0.0 --port 3033"
   },
   "keywords": [],
   "author": "zhoushaojun",
-  "license": "WIT",
+  "license": "MIT",
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
@@ -22,26 +23,29 @@
     "cross-env": "^5.1.1",
     "css-loader": "^0.28.7",
     "extract-text-webpack-plugin": "^3.0.1",
-    "html-webpack-plugin": "^2.30.1",
     "less": "^3.0.0-alpha.3",
     "less-loader": "^4.0.5",
     "react-intl": "^2.4.0",
     "redux-devtools": "^3.4.0",
     "style-loader": "^0.19.0",
     "url-loader": "^0.6.2",
+    "uuid": "^3.1.0",
     "webpack": "^3.6.0",
     "webpack-dev-server": "^2.9.1"
   },
   "dependencies": {
     "babel-runtime": "^6.26.0",
+    "blueimp-md5": "^2.10.0",
+    "jquery": "^3.2.1",
     "lodash": "^4.17.4",
     "natty-fetch": "^2.5.3",
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0",
-    "react-redux": "^5.0.6",
+    "nprogress": "^0.2.0",
+    "react": "^15.6.2",
+    "react-dom": "^15.6.2",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
     "redux": "^3.7.2",
-    "transform-runtime": "0.0.0"
+    "transform-runtime": "0.0.0",
+    "uxcore": "^0.19.13"
   }
 }

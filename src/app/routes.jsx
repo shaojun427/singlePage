@@ -1,21 +1,23 @@
-import React from 'react';
-import { HashRouter as Router, Route, NavLink as Link, Switch, Redirect } from 'react-router-dom';
+import React, {Component} from 'react';
+import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
+import UndefinedPage from '../pages/error/404/index.jsx';
 import HomePage from '../pages/home/index.jsx';
-import errorPage from '../pages/error/index.jsx';
-const I18N = window.i18n;
+import AdminPage from '../pages/admin/index.jsx';
 
-
-let Routes = (<Router>
-  <div>
-    <Link activeClassName="active" replace={true} exact to={{pathname: '/'}}>{I18N.home.title}</Link>　
-    <Link activeClassName="active" replace={true}  to={{pathname: '/error',search: `?errMsg=${I18N.error.info}`}}>{I18N.error.title}</Link>
-    <div className="route-content">
+class App extends Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (<div>
       <Switch>
         <Route path="/" exact component={HomePage}/>
-        <Route path="/error" component={errorPage} />
+        <Route path="/admin" component={AdminPage}/>
+        <Route path="/404" component={UndefinedPage}/>
+        <Redirect path="/" to="/404"/>
       </Switch>
-    </div>
-  </div>
-</Router>)
+    </div>)
+  }
+}
 
-export default Routes;
+export default <Router><Route path="/" component={App} /></Router>;

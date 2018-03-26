@@ -1,18 +1,25 @@
 import nattyFetch from 'natty-fetch';
+import NProgress from 'nprogress';
 
 const context = nattyFetch.context({
   mockUrlPrefix: '/mock/',
   mock: !__ENV__,
-  withCredentials: false,
+  willFetch: () => {
+    NProgress.start();
+  },
+  didFetch: () => {
+    NProgress.done();
+  },
+  withCredentials: true,
   traditional: true,
-  timeout: 5000,
   fit(response) {
     return {
-        "success": response.success,
-        "content": response,
-        "error": response
+      "success": response.success,
+      "content": response,
+      "error": response
     }
   }
+
 });
 
 context.create('Home', {

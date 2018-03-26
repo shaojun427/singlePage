@@ -3,26 +3,53 @@ const webpack = require("webpack");
 const EX = require("extract-text-webpack-plugin");//为了单独打包css
 const EXCSS = new EX('[name].css');
 const env = process.env.NODE_ENV;
+let entry = {
+  vendor: ["react", "react-dom", "react-router", "react-router-dom", "redux", "lodash", "natty-fetch", "uuid", "nprogress"],
+  uxcoreChild: [
+    "uxcore-table"
+  ],
+  index: './src/app/app.js',
+  'en-us': './src/i18ncss/en-us.less'
+};
+let plugins = [
+  EXCSS,
+  new webpack.DefinePlugin({
+    "__ENV__": JSON.stringify(env)
+  }),
+  new webpack.optimize.CommonsChunkPlugin({
+    names: ["uxcoreChild", "vendor"]
+  })
+];
+let devtool = "cheap-module-eval-source-map";
+if(!!env) {
+  plugins.push(new webpack.optimize.UglifyJsPlugin({//线上使用
+    output: {
+      comments: false,
+    },
+    compress: {
+      warnings: false
+    },
+    sourceMap: true
+  }))
+  devtool = "cheap-module-source-map";
+}
 module.exports = {
-  entry: {
-    'index': './src/app/app.js',
-    'zh-CN': './src/i18n/zh-CN.js',
-    'en': './src/i18n/en.js'
-  },
+  entry: entry,
   output: {
     filename: '[name].js',
     path: path.resolve(__dirname, 'dist')
   },
   devServer: {
-    port: 8080
+    disableHostCheck: true,
+    historyApiFallback: true
   },
+  devtool,
   module:{
     rules: [{
       test: /\.(js|jsx)$/,
       exclude: path.resolve(__dirname, 'node_modules'),
       include:[
-        path.resolve(__dirname, 'src/app'),
-        path.resolve(__dirname, 'src/pages')
+        path.resolve(__dirname, 'src')
       ],
       use: [
         {
@@ -34,28 +61,23 @@ module.exports = {
         }
       ]
     },
-    {
-      test: /\.(png|jpg|gif)$/,
-      use: [
-        {
-          loader: 'url-loader',
-          options: {
-            limit: 8192
+      {
+        test: /\.(png|jpg|gif)$/,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 8192
+            }
           }
-        }
-      ]
-    }, {
-      test: /\.(less|css)$/,
-      use: EXCSS.extract({
-        fallback: "style-loader",
-        use: ['css-loader', 'less-loader']
-      })
-    }]
+        ]
+      }, {
+        test: /\.(less|css)$/,
+        use: EXCSS.extract({
+          fallback: "style-loader",
+          use: ['css-loader', 'less-loader']
+        })
+      }]
   },
-  plugins:[
-    EXCSS,
-    new webpack.DefinePlugin({
-        "__ENV__": env
-    })
-  ]
+  plugins: plugins
 };
