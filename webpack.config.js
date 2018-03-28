@@ -11,7 +11,7 @@ let entry = {
   index: './src/app/app.js',
   'en-us': './src/i18ncss/en-us.less'
 };
-const host = env ? "/expressDemo" : "";
+const host = env ? "" : "";
 let plugins = [
   EXCSS,
   new webpack.DefinePlugin({
