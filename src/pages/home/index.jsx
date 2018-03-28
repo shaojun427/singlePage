@@ -1,25 +1,26 @@
 import './index.less'
 import React, {Component} from 'react';
-import store from './store';
-import IO from '../../app/io';
+import reducers from './reducer';
+import {IO} from '../../app/io';
+import { createStore } from 'redux';
+let store = createStore(reducers);
 
 let action = (action, data) => {
   store.dispatch({type: action,data: data});
 }
-
 class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
       inputValue: '',
-      store: store.getState()
+      store: store.getState().counter
     }
   }
   componentWillMount() {
     let me = this;
     me.unsubscribe = store.subscribe(() => {
       me.setState({
-        store: store.getState()
+        store: store.getState().counter
       })
     })
   }
@@ -42,8 +43,8 @@ class Home extends Component {
     });
   }
   render() {
-
     let me = this;
+    console.log(me.state.store)
     return (<div>
       <input onChange={me.changeHandle.bind(me)} value={me.state.inputValue} type="text"/>　
       <button onClick={me.clickHandle.bind(me)}>按钮</button>

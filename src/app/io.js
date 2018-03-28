@@ -28,5 +28,9 @@ context.create('Home', {
     url: 'mock/home/test.json'
   }
 });
+const IO = context.api;
 
-export default context.api;
+export {
+  context,
+  IO
+};

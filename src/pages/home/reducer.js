@@ -1,4 +1,4 @@
-import { createStore } from 'redux';
+import { combineReducers } from 'redux';
 
 let counter = (defaultState = {}, action) => {
   switch (action.type) {
@@ -8,7 +8,6 @@ let counter = (defaultState = {}, action) => {
   }
   return defaultState;
 }
+let reducer = combineReducers({ counter });
 
-let store = createStore(counter);
-
-export default store;
+export default reducer;
