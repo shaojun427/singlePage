@@ -389,6 +389,58 @@ let html5Api = (defaultState = [{
   return defaultState;
 };
 
-let reducer = combineReducers({html5, css3, html5Api});
+let reqHead = (defaultState = [{
+  "name": "Accept",
+  "default": "Accept: text/plain",
+  "desc": "设置接受的内容类型",
+  "key": true
+}, {
+  "name": "Accept-Charset",
+  "default": "Accept-Charset: utf-8",
+  "desc": "设置接受的字符编码",
+  "key": true
+}, {
+  "name": "Accept-Encoding",
+  "default": "Accept-Encoding: gzip, deflate",
+  "desc": "设置接受的编码格式",
+  "key": true
+}, {
+  "name": "Accept-Datetime",
+  "default": "Accept-Datetime: Thu, 31 May 2007 20:35:00 GMT",
+  "desc": "设置接受的版本时间"
+}, {
+  "name": "Accept-Language",
+  "default": "Accept-Language: en-US",
+  "desc": "设置接受的语言"
+}, {
+  "name": "Authorization",
+  "default": "Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==",
+  "desc": "设置HTTP身份验证的凭证",
+  "key": true
+}, {
+  "name": "",
+  "default": "",
+  "desc": "",
+  "key": true
+}, {
+  "name": "",
+  "default": "",
+  "desc": "",
+  "key": true
+}, {
+  "name": "",
+  "default": "",
+  "desc": "",
+  "key": true
+}, {
+  "name": "",
+  "default": "",
+  "desc": "",
+  "key": true
+}], action) => {
+  return defaultState;
+};
+
+let reducer = combineReducers({html5, css3, html5Api, reqHead});
 
 export default reducer;

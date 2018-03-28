@@ -2,6 +2,7 @@ import './index.less'
 import React, {Component} from 'react';
 import reducers from './reducer';
 import {IO} from '../../app/io';
+import Message from "uxcore-message"
 import { createStore } from 'redux';
 let store = createStore(reducers);
 
@@ -12,7 +13,7 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      inputValue: '',
+      oneValue: '',
       store: store.getState().counter
     }
   }
@@ -27,28 +28,34 @@ class Home extends Component {
   componentWillUnmount() {
     this.unsubscribe();
   }
-  changeHandle(e) {
+  changeOne(e) {
     let me = this;
     let value = e.target.value;
     me.setState({
-      inputValue: value
+      oneValue: value
     })
   }
   clickHandle() {
     let me = this;
-    IO.Home.test({data:1}).then((content)=>{
-      action('TEST',{inputValue:JSON.stringify(content.data) + me.state.inputValue})
-    }).catch((error)=>{
-      console.log(error)
-    });
+    // IO.Home.test({data:1}).then((content)=>{
+    //   action('TEST',{inputValue:JSON.stringify(content.data) + me.state.inputValue})
+    // }).catch((error)=>{
+    //   console.log(error)
+    // });
+    const one = me.state.oneValue;
+    if(one === "20180327") {
+      window.sessionStorage.setItem("one","20180327");
+      window.open("./#/admin/interviewQuestion")
+    }else {
+      Message["info"]("密码错误")
+    }
+
   }
   render() {
     let me = this;
-    console.log(me.state.store)
-    return (<div>
-      <input onChange={me.changeHandle.bind(me)} value={me.state.inputValue} type="text"/>　
-      <button onClick={me.clickHandle.bind(me)}>按钮</button>
-      <div>{me.state.store.test}</div>
+    return (<div style={{"textAlign":"center","padding":"20px 0"}}>
+      <input onChange={me.changeOne.bind(me)} value={me.state.oneValue} type="text"/>　
+      <button onClick={me.clickHandle.bind(me)}>前端面试题1</button>
     </div>)
   }
 }

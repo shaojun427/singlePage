@@ -11,7 +11,17 @@ class Page extends Component {
     this.state = {
       htmlTableOpen: false,
       cssTableOpen: false,
-      apiTableOpen: true
+      apiTableOpen: true,
+      reqHeadOpen: false,
+      reqBodyOpen: false,
+      resHeadOpen: false,
+      resBodyOpen: false
+    }
+  }
+  componentWillMount() {
+    const key = window.sessionStorage.getItem("one");
+    if(key !== "20180327") {
+      location.href = "/"
     }
   }
   htmlFold() {
@@ -32,9 +42,15 @@ class Page extends Component {
       apiTableOpen: !status
     })
   }
+  reqHeadFold() {
+    const status = this.state.reqHeadOpen;
+    this.setState({
+      reqHeadOpen: !status
+    })
+  }
   render() {
     const me = this;
-    const {state, htmlFold, cssFold, apiFold} = me;
+    const {state, htmlFold, cssFold, apiFold, reqHeadFold} = me;
     return(<div className="interview-question">
       <h1>2018.03.27——前端面试题</h1>
       <h2>基础题</h2>
@@ -60,12 +76,12 @@ class Page extends Component {
           <p>标记清除：（标记清除的算法分为两个阶段，标记(mark)和清除(sweep). 第一阶段从引用根节点开始标记所有被引用的对象，第二阶段遍历整个堆，把未标记的对象清除。）</p>
         </li>
         <li>
-          <h3>事件循环机制是什么？什么是Event loop?</h3>
+          <h3>4、事件循环机制是什么？什么是Event loop?</h3>
           <p>因为js是单线程语言，所以当出现异步任务，这些任务就会加入任务队列（存在执行栈中，先进先出），当主线程（同步任务）走完后，就会执行任务队列里面的任务（我理解为消息订阅，Promise就是这种执行方式，then就是消息订阅机制，把then里面的事件放在任务队列里面，等promise内部的主线程走完后，根据状态机判断，去执行then里的callbacks）。</p>
           <p>上述的js执行机制是循环不断的，每次主线程走完都会去任务队列里面读取事件，所以称为Event Loop</p>
         </li>
         <li>
-          <h3>css3 中哪些新增的属性？HTML5 中哪些新增的标签、以及api?</h3>
+          <h3>5、css3 中哪些新增的属性？HTML5 中哪些新增的标签、以及api?</h3>
           <p>HTML5 <a onClick={htmlFold.bind(me)}>{state.htmlTableOpen ? "收起" : "展开"}</a></p>
           {state.htmlTableOpen &&
           <table>
@@ -132,8 +148,33 @@ class Page extends Component {
           }
         </li>
         <li>
-          <h3>跨域有几种解决方案？分别的原理是什么？</h3>
+          <h3>6、跨域有几种解决方案？分别的原理是什么？</h3>
           <p><a target="_blank" href="//shaojun427.github.io/singlePage/rossDomain.pdf">预览</a></p>
+        </li>
+        <li>
+          <h3>7、一个http 请求包含哪些内容？(请求头、请求体、返回头、返回体)中包含的哪些比较常用的字段</h3>
+          <p>一个http请求包含了请求协议、请求头、请求体</p>
+          <p>请求头： <a onClick={reqHeadFold.bind(me)}>{state.reqHeadOpen ? "收起" : "展开"}</a></p>
+          {state.reqHeadOpen &&
+          <table>
+            <thead>
+            <tr>
+              <th width="15%">新增API</th>
+              <th width="20%">例子</th>
+              <th width="65%">说明</th>
+            </tr>
+            </thead>
+            <tbody>
+            {store.getState().reqHead.map((item, index) => {
+              return (<tr key={`reqHead-${index}`}>
+                <td className={item.key && "key" || ""}>{item.name || ""}</td>
+                <td>{item.default || ""}</td>
+                <td>{item.desc || ""}</td>
+              </tr>)
+            })}
+            </tbody>
+          </table>
+          }
         </li>
       </ul>
     </div>)
