@@ -14,7 +14,7 @@ class App extends Component {
         <Route path="/" exact component={HomePage}/>
         <Route path="/admin" component={AdminPage}/>
         <Route path="/404" component={UndefinedPage}/>
-        <Redirect path="/" to="/404"/>
+        {/*<Redirect path="/" to="/404"/>*/}
       </Switch>
     </div>)
   }

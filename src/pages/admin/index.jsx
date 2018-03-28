@@ -12,7 +12,7 @@ class Admin extends Component {
       <Switch>
         <Route path="/admin/demo" exact component={Demo}/>
         <Route path="/admin/interviewQuestion" exact component={InterviewQuestion}/>
-        <Redirect path="/admin" to="/404"/>
+        {/*<Redirect path="/admin" to="/404"/>*/}
       </Switch>
     </div>)
   }
