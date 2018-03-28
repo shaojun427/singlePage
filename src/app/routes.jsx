@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
+import { HashRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
 import UndefinedPage from '../pages/error/404/index.jsx';
 import HomePage from '../pages/home/index.jsx';
 import AdminPage from '../pages/admin/index.jsx';
