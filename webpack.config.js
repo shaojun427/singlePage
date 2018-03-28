@@ -11,10 +11,12 @@ let entry = {
   index: './src/app/app.js',
   'en-us': './src/i18ncss/en-us.less'
 };
+const host = env ? "/expressDemo" : "";
 let plugins = [
   EXCSS,
   new webpack.DefinePlugin({
-    "__ENV__": JSON.stringify(env)
+    "__ENV__": JSON.stringify(env),
+    "host": JSON.stringify(host)
   }),
   new webpack.optimize.CommonsChunkPlugin({
     names: ["uxcoreChild", "vendor"]

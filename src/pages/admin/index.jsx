@@ -10,9 +10,9 @@ class Admin extends Component {
   render() {
     return (<div>
       <Switch>
-        <Route path="/admin/demo" exact component={Demo}/>
-        <Route path="/admin/interviewQuestion" exact component={InterviewQuestion}/>
-        {/*<Redirect path="/admin" to="/404"/>*/}
+        <Route path={`${host}/admin/demo`} exact component={Demo}/>
+        <Route path={`${host}/admin/interviewQuestion`} exact component={InterviewQuestion}/>
+        <Redirect path={`${host}/admin`} to="/404"/>
       </Switch>
     </div>)
   }

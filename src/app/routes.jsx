@@ -11,10 +11,10 @@ class App extends Component {
   render() {
     return (<div>
       <Switch>
-        <Route path="/" exact component={HomePage}/>
-        <Route path="/admin" component={AdminPage}/>
-        <Route path="/404" component={UndefinedPage}/>
-        {/*<Redirect path="/" to="/404"/>*/}
+        <Route path={`${host}/`} exact component={HomePage}/>
+        <Route path={`${host}/admin`} component={AdminPage}/>
+        <Route path={`${host}/404`} component={UndefinedPage}/>
+        <Redirect path={`${host}/`} to="/404"/>
       </Switch>
     </div>)
   }
