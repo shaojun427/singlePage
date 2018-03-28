@@ -14,6 +14,7 @@ class Home extends Component {
     super(props);
     this.state = {
       oneValue: '',
+      twoValue: '',
       store: store.getState().counter
     }
   }
@@ -35,27 +36,44 @@ class Home extends Component {
       oneValue: value
     })
   }
+  changeTwo(e) {
+    let me = this;
+    let value = e.target.value;
+    me.setState({
+      twoValue: value
+    })
+  }
   clickHandle() {
     let me = this;
-    // IO.Home.test({data:1}).then((content)=>{
-    //   action('TEST',{inputValue:JSON.stringify(content.data) + me.state.inputValue})
-    // }).catch((error)=>{
-    //   console.log(error)
-    // });
     const one = me.state.oneValue;
     if(one === "20180327") {
-      window.sessionStorage.setItem("one","20180327");
+      window.sessionStorage.setItem("one", one);
       window.open("./#/admin/interviewQuestion")
     }else {
       Message["info"]("密码错误")
     }
-
+  }
+  clickHandle2() {
+    let me = this;
+    const two = me.state.twoValue;
+    if(two === "zhoushaojun") {
+      window.sessionStorage.setItem("two", two);
+      window.open("./#/admin/interviewSupply")
+    }else {
+      Message["info"]("密码错误")
+    }
   }
   render() {
     let me = this;
-    return (<div style={{"textAlign":"center","padding":"20px 0"}}>
-      <input onChange={me.changeOne.bind(me)} value={me.state.oneValue} type="text"/>　
-      <button onClick={me.clickHandle.bind(me)}>前端面试题1</button>
+    return (<div>
+      <div style={{"textAlign":"center","padding":"20px 0"}}>
+        <input onChange={me.changeOne.bind(me)} value={me.state.oneValue} type="text"/>
+        <button onClick={me.clickHandle.bind(me)}>前端面试题1</button>
+      </div>
+      <div style={{"textAlign":"center","padding":"20px 0"}}>
+        <input onChange={me.changeTwo.bind(me)} value={me.state.twoValue} type="text"/>
+        <button onClick={me.clickHandle2.bind(me)}>前端面试题补充</button>
+      </div>
     </div>)
   }
 }

@@ -371,7 +371,7 @@ let html5Api = (defaultState = [{
   "key": true
 }, {
   "name": "FileReader",
-  "desc": "FlieReader类型实现的是一种异步文件读取机制。可以把FileReader想象成XMLHttpRequest，区别只是它读取的是文件心痛，而不是远程服务器。",
+  "desc": "FlieReader类型实现的是一种异步文件读取机制。可以把FileReader想象成XMLHttpRequest，区别只是它读取的是文件信息，而不是远程服务器。",
   "key": true
 }, {
   "name": "Web Workers",
@@ -411,36 +411,208 @@ let reqHead = (defaultState = [{
 }, {
   "name": "Accept-Language",
   "default": "Accept-Language: en-US",
-  "desc": "设置接受的语言"
+  "desc": "设置接受的语言",
+  "key": true
 }, {
   "name": "Authorization",
   "default": "Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==",
-  "desc": "设置HTTP身份验证的凭证",
+  "desc": "设置HTTP身份验证的凭证"
+}, {
+  "name": "Cache-Control",
+  "default": "Cache-Control: no-cache",
+  "desc": "设置请求响应链上所有的缓存机制必须遵守的指令",
   "key": true
 }, {
-  "name": "",
-  "default": "",
-  "desc": "",
+  "name": "Connection",
+  "default": "Connection: keep-alive；Connection: Upgrade",
+  "desc": "设置当前连接和hop-by-hop协议请求字段列表的控制选项",
   "key": true
 }, {
-  "name": "",
-  "default": "",
-  "desc": "",
+  "name": "Content-Length",
+  "default": "Content-Length: 348",
+  "desc": "设置请求体的字节长度",
   "key": true
 }, {
-  "name": "",
-  "default": "",
-  "desc": "",
+  "name": "Content-MD5",
+  "default": "Content-MD5: Q2hlY2sgSW50ZWdyaXR5IQ==",
+  "desc": "设置基于MD5算法对请求体内容进行Base64二进制编码"
+}, {
+  "name": "Content-Type",
+  "default": "Content-Type: application/x-www-form-urlencoded",
+  "desc": "设置请求体的MIME类型（适用POST和PUT请求）",
   "key": true
 }, {
-  "name": "",
-  "default": "",
-  "desc": "",
+  "name": "Cookie",
+  "default": "Cookie: $Version=1; Skin=new;",
+  "desc": "设置服务器使用Set-Cookie发送的http cookie",
+  "key": true
+}, {
+  "name": "Date",
+  "default": "Date: Tue, 15 Nov 1994 08:12:31 GMT",
+  "desc": "设置消息发送的日期和时间"
+}, {
+  "name": "Expect",
+  "default": "Expect: 100-continue",
+  "desc": "标识客户端需要的特殊浏览器行为"
+}, {
+  "name": "Forwarded",
+  "default": "Forwarded: for=192.0.2.60;proto=http;by=203.0.113.43；Forwarded: for=192.0.2.43, for=198.51.100.17",
+  "desc": "披露客户端通过http代理连接web服务的源信息"
+}, {
+  "name": "From",
+  "default": "From: user@example.com",
+  "desc": "设置发送请求的用户的email地址"
+}, {
+  "name": "Host",
+  "default": "Host: en.wikipedia.org:8080；Host: en.wikipedia.org",
+  "desc": "设置服务器域名和TCP端口号，如果使用的是服务请求标准端口号，端口号可以省略",
+  "key": true
+}, {
+  "name": "If-Match",
+  "default": "If-Match: 737060cd8c284d8af7ad3082f209582d",
+  "desc": "设置客户端的ETag,当时客户端ETag和服务器生成的ETag一致才执行，适用于更新自从上次更新之后没有改变的资源"
+}, {
+  "name": "If-Modified-Since",
+  "default": "If-Modified-Since: Sat, 29 Oct 1994 19:43:31 GMT",
+  "desc": "设置更新时间，从更新时间到服务端接受请求这段时间内如果资源没有改变，允许服务端返回304 Not Modified"
+}, {
+  "name": "If-None-Match",
+  "default": "If-None-Match: \"737060cd8c284d8af7ad3082f209582d\"",
+  "desc": "设置客户端ETag，如果和服务端接受请求生成的ETage相同，允许服务端返回304 Not Modified"
+}, {
+  "name": "If-Range",
+  "default": "If-Range: \"737060cd8c284d8af7ad3082f209582d\"",
+  "desc": "设置客户端ETag，如果和服务端接受请求生成的ETage相同，返回缺失的实体部分；否则返回整个新的实体"
+}, {
+  "name": "If-Unmodified-Since",
+  "default": "If-Unmodified-Since: Sat, 29 Oct 1994 19:43:31 GMT",
+  "desc": "设置更新时间，只有从更新时间到服务端接受请求这段时间内实体没有改变，服务端才会发送响应"
+}, {
+  "name": "Max-Forwards",
+  "default": "Max-Forwards: 10",
+  "desc": "限制代理或网关转发消息的次数"
+}, {
+  "name": "Origin",
+  "default": "Origin: http://www.example-social-network.com",
+  "desc": "标识跨域资源请求（请求服务端设置Access-Control-Allow-Origin响应字段）",
+  "key": true
+}, {
+  "name": "Pragma",
+  "default": "Pragma: no-cache",
+  "desc": "设置特殊实现字段，可能会对请求响应链有多种影响"
+}, {
+  "name": "Proxy-Authorization",
+  "default": "Proxy-Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==",
+  "desc": "为连接代理授权认证信息"
+}, {
+  "name": "Range",
+  "default": "Range: bytes=500-999",
+  "desc": "请求部分实体，设置请求实体的字节数范围，具体可以参见HTTP/1.1中的Byte serving",
+  "key": true
+}, {
+  "name": "Referer",
+  "default": "Referer: http://en.wikipedia.org/wiki/Main_Page",
+  "desc": "设置前一个页面的地址，并且前一个页面中的连接指向当前请求，意思就是如果当前请求是在A页面中发送的，那么referer就是A页面的url地址（轶事：这个单词正确的拼法应该是\"referrer\",但是在很多规范中都拼成了\"referer\"，所以这个单词也就成为标准用法）",
+  "key": true
+}, {
+  "name": "TE",
+  "default": "TE: trailers, deflate",
+  "desc": "设置用户代理期望接受的传输编码格式，和响应头中的Transfer-Encoding字段一样"
+}, {
+  "name": "Upgrade",
+  "default": "Upgrade: HTTP/2.0, HTTPS/1.3, IRC/6.9, RTA/x11, websocket",
+  "desc": "请求服务端升级协议"
+}, {
+  "name": "X-Requested-With",
+  "default": "X-Requested-With: XMLHttpRequest",
+  "desc": "标识Ajax请求，大部分js框架发送请求时都会设置它为XMLHttpRequest",
+  "key": true
+}, {
+  "name": "Warning",
+  "default": "Warning: 199 Miscellaneous warning",
+  "desc": "实体可能会发生的问题的通用警告"
+}, {
+  "name": "User-Agent",
+  "default": "User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:12.0) Gecko/20100101 Firefox/21.0",
+  "desc": "用户代理的字符串值",
+  "key": true
+}], action) => {
+  return defaultState;
+};
+let resHead = (defaultState = [{
+  "name": "Accept-Ranges",
+  "default": "Accept-Ranges: bytes",
+  "desc": "服务器通过byte serving支持的部分内容范围类型",
+  "key": true
+}, {
+  "name": "Access-Control-Allow-Origin",
+  "default": "Access-Control-Allow-Origin: *",
+  "desc": "指定哪些站点可以参与跨站资源共享",
+  "key": true
+}, {
+  "name": "Age",
+  "default": "Age: 12",
+  "desc": "对象在代理缓存中暂存的秒数",
+  "key": true
+}, {
+  "name": "Cache-Control",
+  "default": "Cache-Control:max-age=600",
+  "desc": "告诉服务端到客户端所有的缓存机制是否可以缓存这个对象，单位是秒",
+  "key": true
+}, {
+  "name": "Connection",
+  "default": "Connection:keep-alive",
+  "desc": "设置当前连接和hop-by-hop协议请求字段列表的控制选项",
+  "key": true
+}, {
+  "name": "Content-Encoding",
+  "default": "Content-Encoding:gzip",
+  "desc": "设置数据使用的编码类型",
+  "key": true
+}, {
+  "name": "Content-Length",
+  "default": "Content-Length:960",
+  "desc": "响应体的字节长度",
+  "key": true
+}, {
+  "name": "Content-Type",
+  "default": "Content-Type:application/json; charset=utf-8",
+  "desc": "设置响应体的MIME类型",
+  "key": true
+}, {
+  "name": "Date",
+  "default": "Date:Wed, 28 Mar 2018 03:24:46 GMT",
+  "desc": "设置消息发送的日期和时间",
+  "key": true
+}, {
+  "name": "Expires",
+  "default": "Expires:Wed, 28 Mar 2018 03:34:46 GMT",
+  "desc": "设置响应体的过期时间",
+  "key": true
+}, {
+  "name": "Last-Modified",
+  "default": "Last-Modified:Fri, 23 Mar 2018 02:04:11 GMT",
+  "desc": "设置请求对象最后一次的修改日期",
+  "key": true
+}, {
+  "name": "Server",
+  "default": "Server:GitHub.com",
+  "desc": "服务器名称",
+  "key": true
+}, {
+  "name": "Vary",
+  "default": "Vary:Accept-Encoding",
+  "desc": "通知下级代理如何匹配未来的请求头已让其决定缓存的响应是否可用而不是重新从源主机请求新的",
+  "key": true
+}, {
+  "name": "Via",
+  "default": "Via:1.1 varnish",
+  "desc": "通知客户端代理，通过其要发送什么响应",
   "key": true
 }], action) => {
   return defaultState;
 };
 
-let reducer = combineReducers({html5, css3, html5Api, reqHead});
+let reducer = combineReducers({html5, css3, html5Api, reqHead, resHead});
 
 export default reducer;
