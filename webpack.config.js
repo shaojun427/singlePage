@@ -42,8 +42,8 @@ module.exports = {
     path: path.resolve(__dirname, 'dist')
   },
   devServer: {
-    disableHostCheck: true,
-    historyApiFallback: false
+    disableHostCheck: true
+    // historyApiFallback: false
   },
   devtool,
   module:{
