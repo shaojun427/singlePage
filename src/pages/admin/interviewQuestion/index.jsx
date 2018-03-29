@@ -283,8 +283,9 @@ class Page extends Component {
         <li>
           <h3>3、react 最新版本目前是多少？最新的版本中做了哪些比较大的优化？</h3>
           <p>16.2</p>
-          <p>render里面可以直接return组件列表</p>
-          <p>setState里面不是新的state，而是一个callback，cb里面return最新的state</p>
+          <p>1、render里面可以直接return组件列表</p>
+          <p>2、setState里面不是新的state，而是一个callback，cb里面return最新的state</p>
+          <p>3、</p>
         </li>
         <li>
           <h3>4、react中的fiber是什么意思？</h3>
@@ -302,7 +303,8 @@ class Page extends Component {
         <li>
           <h3>6、redux 跟mobx 有什么区别？redux 的基本运行原理</h3>
           <p>在 Redux 中，你将所有的 state 都放在一个全局的 store。这个 store 对象就是你的单一数据源。另一方面，多个 reducers 允许你修改不可变的 state。Mobx 则相反，它使用多 stores。和 Redux 的 reducers 类似，你可以在技术层面或领域进行分治。</p>
-
+          <p>创建reducers，维护state =》根据reducers注册一个store =》dispatch建立action和state的属性 =》subscribe监听store获取最新state =》触发action改变state =》reducers根据action处理state，并返回一个新的state</p>
+          <p></p>
         </li>
       </ul>
     </div>)
