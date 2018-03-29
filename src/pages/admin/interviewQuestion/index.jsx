@@ -302,7 +302,7 @@ class Page extends Component {
         <li>
           <h3>6、redux 跟mobx 有什么区别？redux 的基本运行原理</h3>
           <p>在 Redux 中，你将所有的 state 都放在一个全局的 store。这个 store 对象就是你的单一数据源。另一方面，多个 reducers 允许你修改不可变的 state。Mobx 则相反，它使用多 stores。和 Redux 的 reducers 类似，你可以在技术层面或领域进行分治。</p>
-          
+
         </li>
       </ul>
     </div>)
