@@ -74,6 +74,7 @@ class Home extends Component {
         <input onChange={me.changeTwo.bind(me)} value={me.state.twoValue} type="text"/>
         <button onClick={me.clickHandle2.bind(me)}>前端面试题补充</button>
       </div>
+
     </div>)
   }
 }

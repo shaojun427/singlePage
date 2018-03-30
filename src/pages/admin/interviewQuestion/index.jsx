@@ -282,10 +282,14 @@ class Page extends Component {
         </li>
         <li>
           <h3>3、react 最新版本目前是多少？最新的版本中做了哪些比较大的优化？</h3>
-          <p>16.2</p>
-          <p>1、render里面可以直接return组件列表</p>
-          <p>2、setState里面不是新的state，而是一个callback，cb里面return最新的state</p>
-          <p>3、</p>
+          <p>16.2，16的新特性：</p>
+          <p>1、render里面可以直接return组件列表或者字符串</p>
+          <p>2、setState里面不是新的state，而是一个callback，cb里面return最新的state,return null不触发更新</p>
+          <p>3、新增componentDidCatch生命周期，可以创建一个错误组件来处理错误（之前的版本是错误就unMount组件树）</p>
+          <p>4、createPortal可以将组件的dom渲染到父组件dom之外，但是react层级上，还是在父组件里面。</p>
+          <p>5、支持自定义DOM属性</p>
+          <p>6、更好的服务器端渲染。React 16 包含了一个完全重写的服务端渲染器（randerer）。它真的很快，因为它支持流（streaming），所以可以向客户端更快地发送字节。</p>
+          <p>7、削减文件大小，相比以前的版本，小了32%（gzip后小了30%）。</p>
         </li>
         <li>
           <h3>4、react中的fiber是什么意思？</h3>
@@ -301,10 +305,32 @@ class Page extends Component {
           <p>作用：1、代码复用，代码模块化；2、增删改props；3、渲染劫持</p>
         </li>
         <li>
-          <h3>6、redux 跟mobx 有什么区别？redux 的基本运行原理</h3>
+          <h3>6、redux 跟mobx 有什么区别？redux 的基本运行原理？reducer是用来干什么的？</h3>
           <p>在 Redux 中，你将所有的 state 都放在一个全局的 store。这个 store 对象就是你的单一数据源。另一方面，多个 reducers 允许你修改不可变的 state。Mobx 则相反，它使用多 stores。和 Redux 的 reducers 类似，你可以在技术层面或领域进行分治。</p>
           <p>创建reducers，维护state =》根据reducers注册一个store =》dispatch建立action和state的属性 =》subscribe监听store获取最新state =》触发action改变state =》reducers根据action处理state，并返回一个新的state</p>
-          <p></p>
+          <p>reducer是一个用来更新state的纯函数。</p>
+        </li>
+        <li>
+          <h3>7、let/var 的区别？</h3>
+          <p>let是块级作用域，var是函数作用域</p>
+        </li>
+        <li>
+          <h3>8、set/get 的优点？</h3>
+          <p>
+
+          </p>
+        </li>
+        <li>
+          <h3>9、箭头函数可以解决什么问题？箭头函数中的arguments 是否有值？</h3>
+          <p>1.对 this 的关联。函数内置 this 的值，取决于箭头函数在哪儿定义，而非箭头函数执行的上下文环境。</p>
+          <p>2.new 不可用。箭头函数不能使用 new 关键字来实例化对象，不然会报错。</p>
+          <p>3.this 不可变。函数内置 this 不可变，在函数体内整个执行环境中为常量。</p>
+          <p>4.没有arguments对象。更不能通过arguments对象访问传入参数。只能使用显式命名或其他ES6新特性来完成。</p>
+        </li>
+        <li>
+          <h3>promise vs await async 的区别？</h3>
+          <p>await async就是基于promise的改进，async函数默认返回一个Promise对象，然后await等待的也是一个Promise对象。await的功能类似promise的.then；但是可以省略匿名函数。</p>
+          <p>await async可以嵌套try catch来处理错误。</p>
         </li>
       </ul>
     </div>)
