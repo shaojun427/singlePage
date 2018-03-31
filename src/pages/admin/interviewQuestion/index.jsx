@@ -204,20 +204,20 @@ class Page extends Component {
           <p>响应体：通过响应头中的Content-Type来定义mime类型</p>
         </li>
         <li>
-          <h3>http1.x vs http2.x 有哪些优化？每个新增的特性的原理是什么？(比如什么是多路复用、什么是服务端推送等)</h3>
+          <h3>8、http1.x vs http2.x 有哪些优化？每个新增的特性的原理是什么？(比如什么是多路复用、什么是服务端推送等)</h3>
           <p>1、新的二进制格式：协议解析1.x是基于文本解析的，2.x是基于0和1的二进制解析的。</p>
           <p>2、连接共享（多路复用）：一个request对应一个stream并分配一个id，这样一个连接上可以有多个stream，每个stream的frame可以随机的混杂在一起，接收方可以根据stream id将frame再归属到各自不同的request里面。http2.0里的每个stream都可以设置又优先级（Priority）和依赖（Dependency）。</p>
           <p>3、header压缩：http1.x的header由于cookie和user agent很容易膨胀，而且每次都要重复发送。http2.0使用encoder来减少需要传输的header大小，通讯双方各自cache一份header fields表，既避免了重复header的传输，又减小了需要传输的大小。高效的压缩算法可以很大的压缩header，减少发送包的数量从而降低延迟。</p>
           <p>4、Server Push（服务端推送）：http2.0能通过push的方式将客户端需要的内容预先推送过去，所以也叫“cache push”。另外有一点值得注意的是，客户端如果退出某个业务场景，出于流量或者其它因素需要取消server push，也可以通过发送RST_STREAM类型的frame来做到。</p>
         </li>
         <li>
-          <h3>长连接相关的知识，常用的方式有哪些？</h3>
+          <h3>9、长连接相关的知识，常用的方式有哪些？</h3>
           <p>长连接（Connection:keep-alive）就是客户端与服务器之间创建和保持稳定可靠的连接。TCP协议本身是支持长连接的。</p>
           <p>1、从 HTTP/1.1起，默认使用长连接，用以保持连接特性。在使用长连接的情况下，当一个网页打开完成后，客户端和服务器之间用于传输HTTP数据的 TCP连接不会关闭，如果客户端再次访问这个服务器上的网页，会继续使用这一条已经建立的连接。Keep-Alive不会永久保持连接，它有一个保持时间，可以在不同的服务器软件（如Apache）中设定这个时间。实现长连接要客户端和服务端都支持长连接。</p>
           <p>2、WebSocket 协议，服务器可以主动推送数据到客户端</p>
         </li>
         <li>
-          <h3>前端上常见的性能优化有哪些方式</h3>
+          <h3>10、前端上常见的性能优化有哪些方式</h3>
           <p>dns缓存，减少dns查询次数</p>
           <p>减少传输过程中实体的大小和请求次数</p>
           <p>——1、js、css资源合并打包压缩</p>
@@ -259,7 +259,7 @@ class Page extends Component {
           <p>Virtual DOM 是一个 JavaScript 对象。每次，我们只需要告诉 React 下一个状态是什么，React会自己构建一个新的 Virtual DOM，然后根据新旧 Virtual DOM 快速计算其差异，找出需要重绘或重排的元素，告诉浏览器。浏览器根据相关的更新，重新计算 DOM Tree，重绘页面。</p>
         </li>
         <li>
-          <h3>react 的diff 算法的大致原理是什么？react 中经常使用的key 用来解决什么问题？</h3>
+          <h3>3、react 的diff 算法的大致原理是什么？react 中经常使用的key 用来解决什么问题？</h3>
           <p>diff算法的前提假设</p>
           <p>1、两个相同组件产生类似的DOM结构，不同的组件产生不同的DOM结构；</p>
           <p>2、对于同一层次的一组子节点，它们可以通过唯一的id（react的key）进行区分。</p>
@@ -281,7 +281,7 @@ class Page extends Component {
           <p>key不是用来提升react的性能的，不过用好key对性能是有帮助的。</p>
         </li>
         <li>
-          <h3>3、react 最新版本目前是多少？最新的版本中做了哪些比较大的优化？</h3>
+          <h3>4、react 最新版本目前是多少？最新的版本中做了哪些比较大的优化？</h3>
           <p>16.2，16的新特性：</p>
           <p>1、render里面可以直接return组件列表或者字符串</p>
           <p>2、setState里面不是新的state，而是一个callback，cb里面return最新的state,return null不触发更新</p>
@@ -292,43 +292,43 @@ class Page extends Component {
           <p>7、削减文件大小，相比以前的版本，小了32%（gzip后小了30%）。</p>
         </li>
         <li>
-          <h3>4、react中的fiber是什么意思？</h3>
+          <h3>5、react中的fiber是什么意思？</h3>
           <p>react用的是Stack reconcile调度策略。这个策略像函数调用栈一样，会深度优先遍历所有的 Virtual DOM 节点，进行Diff。它一定要等整棵 Virtual DOM 计算完成之后，才将任务出栈释放主线程。所以，在浏览器主线程被 React更新状态任务占据的时候，用户与浏览器进行任何的交互都不能得到反馈，只有等到任务结束，才能突然得到浏览器的响应。而fiber是将原来的整个 Virtual DOM 的更新任务拆分成一个个小的任务。每次做完一个小任务之后，放弃一下自己的执行将主线程空闲出来，看看有没有其他的任务。如果有的话，就暂停本次任务，执行其他的任务，如果没有的话，就继续下一个任务。</p>
           <p>fiber将整个页面更新并重渲染过程分为两个阶段。</p>
           <p>1、Reconcile 阶段。此阶段中，依序遍历组件，通过diff 算法，判断组件是否需要更新，给需要更新的组件加上tag。遍历完之后，将所有带有tag的组件加到一个队列中（可以设定优先级）。这个阶段的任务可以被打断。</p>
           <p>2、Commit 阶段。根据在 Reconcile 阶段生成的数组，遍历更新DOM，这个阶段需要一次性执行完。如果是在其他的渲染环境 -- Native，硬件，就会更新对应的元素。</p>
         </li>
         <li>
-          <h3>5、react中的HOC是什么意思？</h3>
+          <h3>6、react中的HOC是什么意思？</h3>
           <p>HOC(全称Higher-order component)是一种React的进阶使用方法，主要还是为了便于组件的复用。HOC就是一个方法，获取一个组件，返回一个更高级的组件。</p>
           <p>在React开发过程中，发现有很多情况下，组件需要被"增强"，比如说给组件添加或者修改一些特定的props，一些权限的管理，或者一些其他的优化之类的。而如果这个功能是针对多个组件的，同时每一个组件都写一套相同的代码，明显显得不是很明智，所以就可以考虑使用HOC。</p>
           <p>作用：1、代码复用，代码模块化；2、增删改props；3、渲染劫持</p>
         </li>
         <li>
-          <h3>6、redux 跟mobx 有什么区别？redux 的基本运行原理？reducer是用来干什么的？</h3>
+          <h3>7、redux 跟mobx 有什么区别？redux 的基本运行原理？reducer是用来干什么的？</h3>
           <p>在 Redux 中，你将所有的 state 都放在一个全局的 store。这个 store 对象就是你的单一数据源。另一方面，多个 reducers 允许你修改不可变的 state。Mobx 则相反，它使用多 stores。和 Redux 的 reducers 类似，你可以在技术层面或领域进行分治。</p>
           <p>创建reducers，维护state =》根据reducers注册一个store =》dispatch建立action和state的属性 =》subscribe监听store获取最新state =》触发action改变state =》reducers根据action处理state，并返回一个新的state</p>
           <p>reducer是一个用来更新state的纯函数。</p>
         </li>
         <li>
-          <h3>7、let/var 的区别？</h3>
+          <h3>8、let/var 的区别？</h3>
           <p>let是块级作用域，var是函数作用域</p>
         </li>
         <li>
-          <h3>8、set/get 的优点？</h3>
+          <h3>9、set/get 的优点？</h3>
           <p>
 
           </p>
         </li>
         <li>
-          <h3>9、箭头函数可以解决什么问题？箭头函数中的arguments 是否有值？</h3>
+          <h3>10、箭头函数可以解决什么问题？箭头函数中的arguments 是否有值？</h3>
           <p>1.对 this 的关联。函数内置 this 的值，取决于箭头函数在哪儿定义，而非箭头函数执行的上下文环境。</p>
           <p>2.new 不可用。箭头函数不能使用 new 关键字来实例化对象，不然会报错。</p>
           <p>3.this 不可变。函数内置 this 不可变，在函数体内整个执行环境中为常量。</p>
           <p>4.没有arguments对象。更不能通过arguments对象访问传入参数。只能使用显式命名或其他ES6新特性来完成。</p>
         </li>
         <li>
-          <h3>promise vs await async 的区别？</h3>
+          <h3>11、promise vs await async 的区别？</h3>
           <p>await async就是基于promise的改进，async函数默认返回一个Promise对象，然后await等待的也是一个Promise对象。await的功能类似promise的.then；但是可以省略匿名函数。</p>
           <p>await async可以嵌套try catch来处理错误。</p>
         </li>
